@@ -1,0 +1,50 @@
+:root {
+    --background: #E8ECEF;
+    --background-darker: #D1D9DF;	
+    --primary: #102B3E; 
+    --error: #F2505E;
+    --pass: #59C562;
+    --sky: #3AC3E7;
+    --violet: #E83D60;
+    --purple: #6765E1;
+}
+
+body{
+	margin: 0px;
+	font-family: sans-serif;
+}
+
+.ttypo{
+	background-color: var(--background);
+	color: var(--primary);
+	height: calc(100vh - 32px);
+	width: calc(100vw - 32px);
+	text-align: center;
+	display: table;
+}
+
+.--idle{
+	border: 16px solid var(--sky);
+}
+
+.--pass{
+	border: 16px solid var(--pass);
+}
+
+.--error{
+	border: 16px solid var(--error);
+}
+
+
+.ttypo .__wrapper{
+	display: table-cell;
+    vertical-align: middle;
+}
+.ttypo .__entered{
+	background-color: var(--background);
+	text-align: center;
+}
+
+.ttypo  .__options .--next-word{
+	background-color: var(--background-darker);
+}

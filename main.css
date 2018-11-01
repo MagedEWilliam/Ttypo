@@ -20,7 +20,6 @@ body{
 	height: calc(100vh - 32px);
 	width: calc(100vw - 32px);
 	text-align: center;
-	display: table;
 }
 
 .--idle{
@@ -37,14 +36,62 @@ body{
 
 
 .ttypo .__wrapper{
-	display: table-cell;
-    vertical-align: middle;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+    height: 100%;
+    align-items: center;
+
 }
-.ttypo .__entered{
-	background-color: var(--background);
+.ttypo  .__timer{
+	height: 20%;
+	display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.ttypo  .__playzoon{
+	height: 60%;
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+	font-size: 32px;
+}
+
+.ttypo .--example{
+
+}
+.ttypo .--entered {
+	max-width: 100%;
+	height: 50px;
 	text-align: center;
+	margin-top: 8px;
+	min-width: 100px;
+	background-color: var(--background-darker);
+	border-radius: 3px;
+}
+.ttypo .--entered span{
+	text-align: center;
+	height: 50px;
+	min-width: 100px;
+	margin: 8px 16px;
+}
+
+.ttypo  .__options{
+	height: 20%;
+	width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .ttypo  .__options .--next-word{
-	background-color: var(--background-darker);
+	margin: 16px 8px;
+	padding: 8px 16px;
+	background-color: var(--sky);
+	border-radius: 5px;
+}
+
+.ttypo  .__options .--next-word{
+	color: var(--background);
 }

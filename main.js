@@ -1,3 +1,3 @@
 window.onload = function() {
-    document.querySelector(".ttypo .__entered").focus();
+    document.querySelector(".ttypo .--entered h1").focus();
 };

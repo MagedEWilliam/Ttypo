@@ -20,17 +20,18 @@ body{
 	height: calc(100vh - 32px);
 	width: calc(100vw - 32px);
 	text-align: center;
+	transition: all 300ms;
 }
 
-.--idle{
+.ttypo.--idle{
 	border: 16px solid var(--sky);
 }
 
-.--pass{
+.ttypo.--pass{
 	border: 16px solid var(--pass);
 }
 
-.--error{
+.ttypo.--error{
 	border: 16px solid var(--error);
 }
 
@@ -69,12 +70,17 @@ body{
 	min-width: 100px;
 	background-color: var(--background-darker);
 	border-radius: 3px;
+	cursor: pointer;
 }
 .ttypo .--entered span{
 	text-align: center;
 	height: 50px;
 	min-width: 100px;
 	margin: 8px 16px;
+	cursor: text;
+}
+.ttypo .--entered span a{
+	color: var(--error)
 }
 
 .ttypo  .__options{
@@ -88,10 +94,17 @@ body{
 .ttypo  .__options .--next-word{
 	margin: 16px 8px;
 	padding: 8px 16px;
-	background-color: var(--sky);
 	border-radius: 5px;
+	color: var(--background);
+	transition: all 300ms;
 }
 
-.ttypo  .__options .--next-word{
-	color: var(--background);
+.__options .--next-word.--idle{
+	background-color: var(--sky);
+}
+.__options .--next-word.--pass{
+	background-color: var(--pass);
+}
+.__options .--next-word.--error{
+	background-color: var(--error);
 }

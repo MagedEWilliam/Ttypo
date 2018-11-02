@@ -6,24 +6,27 @@
 	<link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
-	<div class="ttypo --idle">
+	<div class="ttypo" :class="currentClass">
 		<div class="__wrapper">
-			<div class="__timer">00:00</div>
+			<div class="__timer">{{timer}}</div>
 			
 			<div class="__playzoon">
-				<div class="--example"><span>Something</span></div>
-				<div class="--entered">
-					<span contenteditable="true" autofocus></span>
+				<div class="--example">
+					<span>{{example}}</span>
+				</div>
+				<div class="--entered" @click="setFocus">
+					<span contenteditable="true" @input="typing" @keydown.space="nexExample"></span>
 				</div>
 			</div>
 
 			<div class="__options">
 				<a href="" class="--finish">Finish</a>
-				<div class="--next-word">Hit Space for the next word</div>
+				<div class="--next-word" :class="currentClass">Hit Space for the next word</div>
 			</div>
 		</div>
 	</div>
 
+	<script src="vue.js"></script>
 	<script src="main.js"></script>
 </body>
 </html>

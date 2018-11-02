@@ -71,7 +71,7 @@ var app = new Vue({
 			}
 
 			if(this.isCorrectLetter){
-				
+
 				this.correctSound.currentTime=0;
 				this.correctSound.play();
 				this.currentStatus = 1;
@@ -83,7 +83,7 @@ var app = new Vue({
 			}
 			setTimeout(function(){
 				this.currentStatus = 0;
-			}, 50);
+			}.bind(this), 300);
 
 			event.target.innerHTML = this.sortLetters;
 		},

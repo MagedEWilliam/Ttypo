@@ -79,7 +79,7 @@ body{
 	margin: 8px 16px;
 	cursor: text;
 }
-.ttypo .--entered span a{
+.ttypo .--entered .--wrong{
 	color: var(--error)
 }
 

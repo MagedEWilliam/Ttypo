@@ -1,14 +1,20 @@
-function reverseString(str) {
-    var splitString = str.split("");
-    var reverseArray = splitString.reverse();
-    var joinArray = reverseArray.join("");
-    return joinArray;
+function setCaretToEnd(target) {
+  const range = document.createRange();
+  const sel = window.getSelection();
+  range.selectNodeContents(target);
+  range.collapse(false);
+  sel.removeAllRanges();
+  sel.addRange(range);
+  target.focus();
+  range.detach();
+  target.scrollTop = target.scrollHeight; 
 }
 
 var app = new Vue({
 	el: '.ttypo',
 	data: {
-		example: 'Something',
+		example: ['Something', 'is', 'bieng', 'wriiten', 'here'],
+		currentExample: 0,
 		typed: '',
 		currentStatus: 0,
 		timerStarted: false,
@@ -22,7 +28,7 @@ var app = new Vue({
 	computed:{
 		isCorrectLetter: function(){
 			var typedLettersCount = this.typed.length -1;
-			if(this.typed[typedLettersCount] ===  this.example[typedLettersCount]){
+			if(this.typed[typedLettersCount] ===  this.example[this.currentExample][typedLettersCount]){
 				return true;
 			}
 			return false;
@@ -41,18 +47,24 @@ var app = new Vue({
 			return status;
 		},
 		sortLetters: function(){
-			var exampleLettersCount = this.typed.length -1;
-			var styledTyped = '';
+			var typed = this.typed;
+			var example = this.example[this.currentExample];
+			
+			var exampleLettersCount = typed.length -1;
+			var styledTyped = [];
 
 			for(var i = 0; i <= exampleLettersCount; i++){
-				if(this.example[i] === this.typed[i]){
-					styledTyped += this.typed[i];
+				
+				if(example[i] === typed[i]){
+					styledTyped.push('<a class="--correct">'+typed[i]+'</a>');
 				}else{
-					styledTyped += '<a>'+this.typed[i]+'</a>';
+					styledTyped.push('<a class="--wrong">'+typed[i]+'</a>');
 				}
 			}
 
-			return styledTyped;
+			console.log(styledTyped.reverse().join(""))
+
+			return styledTyped.reverse().join("");
 		},
 		timer: function(){
 			return '00:00';
@@ -81,14 +93,18 @@ var app = new Vue({
 				this.wrongSound.play();
 				this.currentStatus = 2;
 			}
+
 			setTimeout(function(){
 				this.currentStatus = 0;
 			}.bind(this), 300);
 
 			event.target.innerHTML = this.sortLetters;
+
+			setCaretToEnd(event.target);
 		},
 		nexExample: function() {
 			if(this.typed === this.example) {
+				this.currentExample += 1;
 				console.log('next');
 			}
 		}

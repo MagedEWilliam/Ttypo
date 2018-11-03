@@ -13,7 +13,7 @@ function setCaretToEnd(target) {
 var app = new Vue({
 	el: '.ttypo',
 	data: {
-		example: ['Something', 'is', 'bieng', 'wriiten', 'here'],
+		example: ['Something', 'is', 'bieng', 'written', 'here'],
 		currentExample: 0,
 		typed: '',
 		currentStatus: 0,
@@ -28,7 +28,8 @@ var app = new Vue({
 	computed:{
 		isCorrectLetter: function(){
 			var typedLettersCount = this.typed.length -1;
-			if(this.typed[typedLettersCount] ===  this.example[this.currentExample][typedLettersCount]){
+			var exampleLettersCount = this.example[this.currentExample].length -1;
+			if(this.typed[typedLettersCount].trim() ===  this.example[this.currentExample][typedLettersCount]){
 				return true;
 			}
 			return false;
@@ -57,7 +58,7 @@ var app = new Vue({
 				
 				if(example[i] === typed[i]){
 					styledTyped.push('<a class="--correct">'+typed[i]+'</a>');
-				}else{
+				}else if(example[i] !== typed[i]){
 					styledTyped.push('<a class="--wrong">'+typed[i]+'</a>');
 				}
 			}
@@ -102,9 +103,19 @@ var app = new Vue({
 
 			setCaretToEnd(event.target);
 		},
-		nexExample: function() {
-			if(this.typed === this.example) {
+		nextExample: function(event) {
+			if(this.typed.trim() === this.example[this.currentExample]) {
 				this.currentExample += 1;
+
+				HTMLElement.prototype.empty = function() {
+				    while (this.firstChild) {
+				        this.removeChild(this.firstChild);
+				    }
+				}
+
+				this.typed = '';
+				event.target.innerHTML = '';
+				
 				console.log('next');
 			}
 		}

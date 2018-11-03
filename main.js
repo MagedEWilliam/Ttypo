@@ -109,7 +109,11 @@ var app = new Vue({
 		},
 		nextExample: function(event) {
 			if(this.typed.trim() === this.example[this.currentExample]) {
-				this.currentExample += 1;
+				if(this.currentExample+1 >= this.example.length){
+					this.currentExample = 0;
+				}else{
+					this.currentExample += 1;
+				}
 
 				HTMLElement.prototype.empty = function() {
 					while (this.firstChild) {

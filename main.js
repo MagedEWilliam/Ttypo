@@ -1,19 +1,19 @@
 function setCaretToEnd(target) {
-  const range = document.createRange();
-  const sel = window.getSelection();
-  range.selectNodeContents(target);
-  range.collapse(false);
-  sel.removeAllRanges();
-  sel.addRange(range);
-  target.focus();
-  range.detach();
-  target.scrollTop = target.scrollHeight; 
+	const range = document.createRange();
+	const sel = window.getSelection();
+	range.selectNodeContents(target);
+	range.collapse(false);
+	sel.removeAllRanges();
+	sel.addRange(range);
+	target.focus();
+	range.detach();
+	target.scrollTop = target.scrollHeight; 
 }
 
 var app = new Vue({
 	el: '.ttypo',
 	data: {
-		example: ['Something', 'is', 'bieng', 'written', 'here'],
+		example: ['ds', 'Something', 'is', 'bieng', 'written', 'here'],
 		currentExample: 0,
 		typed: '',
 		currentStatus: 0,
@@ -48,24 +48,28 @@ var app = new Vue({
 			return status;
 		},
 		sortLetters: function(){
+
 			var typed = this.typed;
 			var example = this.example[this.currentExample];
 			
 			var exampleLettersCount = typed.length -1;
 			var styledTyped = [];
 
-			for(var i = 0; i <= exampleLettersCount; i++){
-				
-				if(example[i] === typed[i]){
-					styledTyped.push('<a class="--correct">'+typed[i]+'</a>');
-				}else if(example[i] !== typed[i]){
-					styledTyped.push('<a class="--wrong">'+typed[i]+'</a>');
+
+			if(typed[0].charCodeAt(0) != 160){
+				for(var i = 0; i <= exampleLettersCount; i++){
+
+					if(example[i] === typed[i]){
+						styledTyped.push('<a class="--correct">'+typed[i]+'</a>');
+					}else if(example[i] !== typed[i]){
+						styledTyped.push('<a class="--wrong">'+typed[i]+'</a>');
+					}
+
 				}
 			}
+			var styledTypedReady = styledTyped.reverse().reverse().join("");
 
-			console.log(styledTyped.reverse().join(""))
-
-			return styledTyped.reverse().join("");
+			return styledTypedReady;
 		},
 		timer: function(){
 			return '00:00';
@@ -108,9 +112,9 @@ var app = new Vue({
 				this.currentExample += 1;
 
 				HTMLElement.prototype.empty = function() {
-				    while (this.firstChild) {
-				        this.removeChild(this.firstChild);
-				    }
+					while (this.firstChild) {
+						this.removeChild(this.firstChild);
+					}
 				}
 
 				this.typed = '';

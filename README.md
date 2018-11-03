@@ -1,6 +1,6 @@
 # Ttypo
 
-##An opensourse keyboard typing trraining
+## An opensourse keyboard typing trraining
 
 =======
 

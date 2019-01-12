@@ -13,13 +13,16 @@ function setCaretToEnd(target) {
 var app = new Vue({
 	el: '.ttypo',
 	data: {
-		example: ['ds', 'Something', 'is', 'bieng', 'written', 'here'],
+		example: ['hi', 'example', 'some'],
+		languages: ['en', 'ar'],
+		selectedLanguages: [0, 0],
 		currentExample: 0,
 		typed: '',
 		currentStatus: 0,
 		timerStarted: false,
-		correctSound: new Audio('single-key-press.mp3'),
-		wrongSound: new Audio('swipe-over-keys.mp3')
+		correctLetterSound: new Audio('single-key-press.mp3'),
+		nextWordSound: new Audio('success-powerup.mp3'),
+		wrongLetterSound: new Audio('swipe-over-keys.mp3')
 	},
 	mounted: function() {
 		this.$el.querySelector('.--entered span').focus();
@@ -79,34 +82,6 @@ var app = new Vue({
 		setFocus: function() {
 			document.querySelector(".ttypo .--entered span").focus();
 		},
-		typing:function(event){
-
-			this.typed = event.target.innerText;
-			
-			if(this.typed === this.example){
-				console.log('pass');
-			}
-
-			if(this.isCorrectLetter){
-
-				this.correctSound.currentTime=0;
-				this.correctSound.play();
-				this.currentStatus = 1;
-			}else if(!this.isCorrectLetter){
-
-				this.wrongSound.currentTime=0;
-				this.wrongSound.play();
-				this.currentStatus = 2;
-			}
-
-			setTimeout(function(){
-				this.currentStatus = 0;
-			}.bind(this), 300);
-
-			event.target.innerHTML = this.sortLetters;
-
-			setCaretToEnd(event.target);
-		},
 		nextExample: function(event) {
 			if(this.typed.trim() === this.example[this.currentExample]) {
 				if(this.currentExample+1 >= this.example.length){
@@ -123,9 +98,42 @@ var app = new Vue({
 
 				this.typed = '';
 				event.target.innerHTML = '';
-				
-				console.log('next');
 			}
-		}
+		},
+		typing:function(event){
+
+			this.typed = event.target.innerText;
+			
+			if(this.typed === this.example){
+				console.log('pass');
+			}
+
+			if(this.isCorrectLetter){
+
+				this.correctLetterSound.currentTime=0;
+				this.correctLetterSound.play();
+				this.currentStatus = 1;
+			}else if(!this.isCorrectLetter){
+
+				if(this.typed.trim() != ''){
+
+					this.wrongLetterSound.currentTime=0;
+					this.wrongLetterSound.play();
+					this.currentStatus = 2;
+				}else{
+
+					this.nextWordSound.currentTime=0;
+					this.nextWordSound.play();
+				}
+			}
+
+			setTimeout(function(){
+				this.currentStatus = 0;
+			}.bind(this), 300);
+
+			event.target.innerHTML = this.sortLetters;
+
+			setCaretToEnd(event.target);
+		},
 	}
 })

@@ -13,6 +13,7 @@ function setCaretToEnd(target) {
 var app = new Vue({
 	el: '.ttypo',
 	data: {
+		preloading: true,
 		example: ['hi', 'example', 'some'],
 		languages: ['en', 'ar'],
 		selectedLanguages: [0, 0],
@@ -25,6 +26,7 @@ var app = new Vue({
 		wrongLetterSound: new Audio('swipe-over-keys.mp3')
 	},
 	mounted: function() {
+		this.preloading = false;
 		this.$el.querySelector('.--entered span').focus();
 		this.$el.querySelector('.--entered span').innerText = this.typed;
 	},
@@ -80,7 +82,7 @@ var app = new Vue({
 	},
 	methods: {
 		setFocus: function() {
-			document.querySelector(".ttypo .--entered span").focus();
+			document.querySelector(".ttypo .--entered .--area").focus();
 		},
 		nextExample: function(event) {
 			if(this.typed.trim() === this.example[this.currentExample]) {

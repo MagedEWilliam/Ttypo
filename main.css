@@ -16,6 +16,7 @@ body{
 
 .ttypo{
 	background-color: var(--background);
+	border: 16px solid var(--sky);
 	color: var(--primary);
 	height: calc(100vh - 32px);
 	width: calc(100vw - 32px);
@@ -35,7 +36,33 @@ body{
 	border: 16px solid var(--error);
 }
 
-
+.ttypo .__loader{
+	position: absolute;
+	left: 16px;
+	right: 16px;
+	top: 16px;
+	bottom: 16px;
+	margin: auto;
+	background-color: var(--background);
+}
+.ttypo .__loader .--logo em{
+	animation: blink 400ms infinite alternate;
+}
+.ttypo .__loader .--logo b{
+	font-weight: 300;
+	color: var(--error);
+}
+.ttypo .__loader .--logo{
+	position: absolute;
+	width: 100%;
+	top: 0px;
+	bottom: 108px;
+	margin: auto;
+	font-size: 32px;
+	font-weight: 300;
+	text-align: center;
+	height: fit-content;
+}
 .ttypo .__wrapper{
 	display: flex;
 	flex-direction: column;
@@ -43,7 +70,7 @@ body{
 	justify-content: center;
     height: 100%;
     align-items: center;
-
+	zoom: 1.3;
 }
 .ttypo  .__timer{
 	height: 20%;
@@ -91,6 +118,19 @@ body{
     justify-content: flex-end;
 }
 
+.ttypo  .__options .--lang input{
+
+}
+.ttypo  .__options .--lang{
+	float: left;
+	margin: 0px 8px 16px 8px;
+	padding: 8px 8px 8px 16px ;
+	border-radius: 5px;
+	text-transform: capitalize;
+	background-color: var(--background-darker);
+	cursor: pointer;
+}
+
 .ttypo  .__options .--next-word{
 	margin: 16px 8px;
 	padding: 8px 16px;
@@ -107,4 +147,13 @@ body{
 }
 .__options .--next-word.--error{
 	background-color: var(--error);
+}
+
+@keyframes blink{
+	from{
+		opacity: 0;
+	}
+	to{
+		opacity: 1;
+	}
 }

@@ -7,26 +7,29 @@
 </head>
 <body>
 	<div class="ttypo" :class="currentClass">
-		<div class="__wrapper">
+		<div class="__wrapper" v-if="!preloading">
 			<div class="__timer">{{timer}}</div>
 			
 			<div class="__playzoon">
 				<div class="--example">
 					<span>{{example[currentExample]}}</span>
 				</div>
-				<div class="--entered" @click="setFocus">
-					<span contenteditable="true" @input="typing" @keydown.space="nextExample"></span>
-				</div>
+				<span class="--entered --area" contenteditable="true" @input="typing" @keydown.space="nextExample" @click="setFocus"></span>
 			</div>
 
 			<div class="__options">
 				<div class="--languages">
-					<input type="checkbox" name="ar">
-					<input type="checkbox" name="en">
+					<label v-for="lang in languages" class="--lang">
+						{{lang}}
+						<input type="checkbox" name="ar">
+					</label>
 				</div>
 				<a href="" class="--finish">Finish</a>
 				<div class="--next-word" :class="currentClass">Hit Space for the next word</div>
 			</div>
+		</div>
+		<div class="__loader" v-else>
+			<h1 class="--logo">T<b>typo</b><em>|</em></h1>
 		</div>
 	</div>
 
